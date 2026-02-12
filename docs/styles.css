@@ -154,124 +154,99 @@ body {
   right: max(4vw, 20px);
   top: 50%;
   transform: translateY(-50%) translateX(30px);
-  width: min(420px, 92vw);
+  width: 92px;
+  height: 92px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 20;
 }
 
-.card {
-  width: 100%;
-  background: var(--card);
-  color: var(--ink);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: 0 32px 82px rgba(0, 0, 0, 0.52);
-}
-
-.card h2 {
-  margin: 0;
-  font-size: 28px;
-}
-
-.desc {
-  margin: 8px 0 18px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.card button {
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #f5feff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-  cursor: pointer;
-}
-
-.card button:hover {
-  filter: brightness(1.04);
-}
-
-#submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-#submit-btn.portal-btn {
+.portal-form {
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.portal-form::before {
+  content: "";
+  position: absolute;
+  inset: 8% 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(1.4px 1.4px at 22% 34%, rgba(245, 249, 255, 0.95), transparent 62%),
+    radial-gradient(1.3px 1.3px at 72% 22%, rgba(196, 217, 255, 0.88), transparent 64%),
+    radial-gradient(1.2px 1.2px at 78% 76%, rgba(239, 245, 255, 0.92), transparent 65%),
+    radial-gradient(1.2px 1.2px at 36% 78%, rgba(177, 205, 255, 0.84), transparent 62%);
+  opacity: 0.72;
+  animation: star-drift 7s linear infinite;
+  pointer-events: none;
+}
+
+#submit-btn.portal-orb {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(126, 145, 204, 0.38);
+  padding: 0;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid rgba(143, 163, 219, 0.35);
-  background: radial-gradient(circle at 50% 46%, rgba(26, 33, 58, 0.95), rgba(7, 10, 20, 0.97) 56%, rgba(2, 3, 8, 1) 100%);
-  color: #dce8ff;
-  letter-spacing: 0.22em;
-  text-transform: lowercase;
-  font-weight: 700;
-  font-size: 17px;
+  cursor: pointer;
+  background: radial-gradient(circle at 48% 46%, rgba(16, 20, 34, 0.92), rgba(3, 4, 10, 0.98) 64%, #000 100%);
   box-shadow:
-    inset 0 0 24px rgba(51, 69, 129, 0.3),
-    0 8px 18px rgba(0, 0, 0, 0.45);
+    0 0 0 1px rgba(8, 10, 18, 0.72) inset,
+    0 0 14px rgba(120, 147, 237, 0.44),
+    0 0 34px rgba(66, 93, 190, 0.24);
+  animation: orb-glow 2.2s ease-in-out infinite;
 }
 
-#submit-btn.portal-btn span {
+#submit-btn.portal-orb span {
   position: relative;
   z-index: 4;
-  text-shadow: 0 0 12px rgba(187, 212, 255, 0.4);
+  display: block;
+  font-size: 8px;
+  line-height: 42px;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  text-align: center;
+  color: #d7e7ff;
+  text-shadow:
+    0 0 6px rgba(164, 196, 255, 0.45),
+    0 0 12px rgba(81, 120, 228, 0.34);
 }
 
-#submit-btn.portal-btn::before {
+#submit-btn.portal-orb::before {
   content: "";
   position: absolute;
-  inset: -38% -20%;
+  inset: -16%;
   z-index: 1;
   background:
-    radial-gradient(1.6px 1.6px at 10% 18%, rgba(241, 246, 255, 0.95), transparent 60%),
-    radial-gradient(1.4px 1.4px at 24% 62%, rgba(189, 214, 255, 0.82), transparent 62%),
-    radial-gradient(1.7px 1.7px at 38% 28%, rgba(218, 230, 255, 0.85), transparent 60%),
-    radial-gradient(1.5px 1.5px at 52% 74%, rgba(255, 255, 255, 0.92), transparent 63%),
-    radial-gradient(1.6px 1.6px at 66% 41%, rgba(170, 199, 255, 0.86), transparent 60%),
-    radial-gradient(1.8px 1.8px at 82% 20%, rgba(236, 243, 255, 0.94), transparent 62%),
-    radial-gradient(1.4px 1.4px at 91% 68%, rgba(202, 224, 255, 0.8), transparent 63%);
-  opacity: 0.88;
-  animation: star-drift 8s linear infinite;
+    radial-gradient(1.2px 1.2px at 24% 28%, rgba(249, 252, 255, 0.95), transparent 65%),
+    radial-gradient(1.3px 1.3px at 76% 30%, rgba(191, 216, 255, 0.82), transparent 64%),
+    radial-gradient(1.2px 1.2px at 66% 76%, rgba(236, 244, 255, 0.9), transparent 62%);
+  opacity: 0.82;
+  animation: star-drift 6.6s linear infinite;
 }
 
-#submit-btn.portal-btn::after {
+#submit-btn.portal-orb::after {
   content: "";
   position: absolute;
-  inset: 18% 34%;
+  inset: 24%;
   z-index: 2;
   border-radius: 50%;
-  border: 1px solid rgba(106, 138, 228, 0.42);
-  background: radial-gradient(circle, rgba(20, 29, 66, 0.05) 24%, rgba(12, 18, 38, 0.78) 50%, rgba(2, 3, 8, 0.98) 76%, rgba(0, 0, 0, 1) 100%);
+  background: radial-gradient(circle, rgba(15, 22, 44, 0.06) 30%, rgba(5, 8, 18, 0.88) 62%, rgba(0, 0, 0, 1) 100%);
   box-shadow:
-    0 0 28px rgba(98, 132, 245, 0.42),
-    inset 0 0 26px rgba(0, 0, 0, 0.95);
-  animation: hole-pulse 2.7s ease-in-out infinite;
+    0 0 12px rgba(95, 132, 236, 0.4),
+    inset 0 0 16px rgba(0, 0, 0, 0.95);
+  animation: hole-pulse 2.6s ease-in-out infinite;
 }
 
-#submit-btn.portal-btn:hover {
-  filter: none;
-  box-shadow:
-    inset 0 0 30px rgba(63, 87, 167, 0.38),
-    0 10px 24px rgba(0, 0, 0, 0.52);
-}
-
-#submit-btn.portal-btn.is-loading {
-  opacity: 0.88;
+#submit-btn.portal-orb.is-loading {
+  opacity: 0.92;
   cursor: wait;
-}
-
-#status {
-  min-height: 18px;
-  margin: 14px 0 0;
-  font-size: 13px;
-  color: #365667;
 }
 
 body.light-on .scene {
@@ -295,10 +270,6 @@ body.light-on .panel-shell {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(-50%) translateX(0);
-}
-
-body.light-on .card {
-  box-shadow: 0 24px 54px rgba(47, 56, 69, 0.2);
 }
 
 @keyframes glow-flicker {
@@ -343,6 +314,27 @@ body.light-on .card {
   100% {
     transform: scale(0.95);
     opacity: 0.88;
+  }
+}
+
+@keyframes orb-glow {
+  0% {
+    box-shadow:
+      0 0 0 1px rgba(8, 10, 18, 0.72) inset,
+      0 0 10px rgba(108, 138, 236, 0.38),
+      0 0 24px rgba(65, 89, 176, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(10, 12, 22, 0.74) inset,
+      0 0 16px rgba(149, 177, 255, 0.55),
+      0 0 36px rgba(88, 120, 224, 0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(8, 10, 18, 0.72) inset,
+      0 0 11px rgba(116, 147, 241, 0.4),
+      0 0 26px rgba(66, 93, 186, 0.2);
   }
 }
 

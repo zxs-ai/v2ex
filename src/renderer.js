@@ -1,6 +1,5 @@
 const form = document.getElementById("login-form");
 const submitButton = document.getElementById("submit-btn");
-const statusNode = document.getElementById("status");
 const cursorGlow = document.getElementById("cursor-glow");
 const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
@@ -33,10 +32,6 @@ const state = {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
-}
-
-function setStatus(text) {
-  statusNode.textContent = text;
 }
 
 function setCursorGlow(event) {
@@ -205,12 +200,10 @@ function setLoading(loading) {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   setLoading(true);
-  setStatus("正在打开官方登录页面...");
 
   try {
     await window.v2exClient.openOfficialSignin();
   } catch (error) {
-    setStatus(`打开失败：${error?.message || "未知错误"}`);
     setLoading(false);
   }
 });

@@ -1,5 +1,4 @@
 const form = document.getElementById("login-form");
-const statusNode = document.getElementById("status");
 const cursorGlow = document.getElementById("cursor-glow");
 const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
@@ -34,10 +33,6 @@ const state = {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
-}
-
-function setStatus(text) {
-  statusNode.textContent = text;
 }
 
 function setCursorGlow(event) {
@@ -200,6 +195,5 @@ requestAnimationFrame(animate);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  setStatus("正在打开 V2EX 官方登录页...");
   window.location.href = SIGNIN_URL;
 });

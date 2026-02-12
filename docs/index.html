@@ -23,16 +23,11 @@
       </section>
 
       <section class="panel-shell" id="panel-shell">
-        <div class="card">
-          <h2>进入官方登录</h2>
-          <p class="desc">开灯后点击按钮，进入 V2EX 官方登录页。</p>
-
-          <form id="login-form" autocomplete="on">
-            <button id="submit-btn" class="portal-btn" type="submit"><span>v2ex</span></button>
-          </form>
-
-          <p id="status" aria-live="polite"></p>
-        </div>
+        <form id="login-form" class="portal-form" autocomplete="off">
+          <button id="submit-btn" class="portal-orb" type="submit" aria-label="v2ex">
+            <span>v2ex</span>
+          </button>
+        </form>
       </section>
     </main>
     <script src="./script.js"></script>
