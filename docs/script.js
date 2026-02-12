@@ -23,7 +23,7 @@ const state = {
   lateral: 0,
   velocity: 0,
   lateralVelocity: 0,
-  toggledInDrag: false,
+  readyToToggle: false,
   recoiling: false,
   recoilStart: 0,
   jitterAmp: 0,
@@ -110,10 +110,12 @@ function onDragStart(event) {
   state.startX = event.clientX;
   state.startPull = state.pull;
   state.startLateral = state.lateral;
-  state.toggledInDrag = false;
+  state.readyToToggle = false;
   state.recoiling = false;
   ropeZone.classList.add("active", "dragging");
-  ropeGrip.setPointerCapture(event.pointerId);
+  if (typeof event.currentTarget?.setPointerCapture === "function") {
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
 }
 
 function onDragMove(event) {
@@ -129,9 +131,8 @@ function onDragMove(event) {
   const softCurve = Math.sin(dy * 0.14) * 2.6;
   state.lateral = clamp(state.startLateral + dx * 0.42 + softCurve, -34, 34);
 
-  if (!state.toggledInDrag && state.pull >= TOGGLE_THRESHOLD) {
-    toggleLight();
-    state.toggledInDrag = true;
+  if (state.pull >= TOGGLE_THRESHOLD) {
+    state.readyToToggle = true;
   }
 }
 
@@ -141,7 +142,10 @@ function onDragEnd() {
   }
 
   state.dragging = false;
-  state.toggledInDrag = false;
+  if (state.readyToToggle) {
+    toggleLight();
+  }
+  state.readyToToggle = false;
 
   state.velocity = -(4.2 + Math.random() * 6.2) - Math.min(state.pull, MAX_PULL) * 0.08;
   state.lateralVelocity += (Math.random() - 0.5) * (1.4 + Math.abs(state.lateral) * 0.06);
