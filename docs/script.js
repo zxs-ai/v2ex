@@ -5,7 +5,6 @@ const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
 const ropePath = document.getElementById("rope-path");
 const ropePathBack = document.getElementById("rope-path-back");
-const warpOverlay = document.getElementById("warp-overlay");
 
 const SIGNIN_URL = "https://www.v2ex.com/signin";
 
@@ -13,7 +12,7 @@ const ROPE_X = 60;
 const ROPE_BASE_Y = 340;
 const MAX_PULL = 132;
 const TOGGLE_THRESHOLD = 52;
-const WARP_DURATION_MS = 820;
+const WARP_DURATION_MS = 760;
 
 const state = {
   dragging: false,
@@ -50,20 +49,11 @@ function toggleLight() {
   document.body.classList.toggle("light-on");
 }
 
-function setWarpOriginFromButton() {
-  const rect = submitButton.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-  warpOverlay.style.setProperty("--warp-x", `${x}px`);
-  warpOverlay.style.setProperty("--warp-y", `${y}px`);
-}
-
 function startWarpAndNavigate(navigateFn) {
   if (isWarping) {
     return;
   }
   isWarping = true;
-  setWarpOriginFromButton();
   submitButton.disabled = true;
   submitButton.classList.add("is-loading");
   document.body.classList.add("is-warping");

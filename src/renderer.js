@@ -5,13 +5,12 @@ const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
 const ropePath = document.getElementById("rope-path");
 const ropePathBack = document.getElementById("rope-path-back");
-const warpOverlay = document.getElementById("warp-overlay");
 
 const ROPE_X = 60;
 const ROPE_BASE_Y = 340;
 const MAX_PULL = 132;
 const TOGGLE_THRESHOLD = 52;
-const WARP_DURATION_MS = 820;
+const WARP_DURATION_MS = 760;
 
 const state = {
   dragging: false,
@@ -46,14 +45,6 @@ function setCursorGlow(event) {
 
 function toggleLight() {
   document.body.classList.toggle("light-on");
-}
-
-function setWarpOriginFromButton() {
-  const rect = submitButton.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-  warpOverlay.style.setProperty("--warp-x", `${x}px`);
-  warpOverlay.style.setProperty("--warp-y", `${y}px`);
 }
 
 function drawRope(now) {
@@ -214,7 +205,6 @@ async function startWarpAndNavigate(navigateFn) {
   }
 
   isWarping = true;
-  setWarpOriginFromButton();
   setLoading(true);
   document.body.classList.add("is-warping");
 

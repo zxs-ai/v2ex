@@ -163,8 +163,6 @@ body {
 }
 
 .warp-overlay {
-  --warp-x: 76%;
-  --warp-y: 50%;
   position: absolute;
   inset: 0;
   z-index: 70;
@@ -174,54 +172,44 @@ body {
   transition: opacity 0.18s ease;
 }
 
-.warp-scan {
+.dissolve-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(180deg, #f8f8f8 0%, #ededed 30%, #e2e2e2 100%);
+}
+
+.dissolve-topbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 44px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.22);
+  opacity: 0;
+}
+
+.dissolve-grain {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(1.5px 1.5px at 8% 13%, rgba(255, 255, 255, 0.56), transparent 62%),
+    radial-gradient(1.3px 1.3px at 22% 71%, rgba(255, 255, 255, 0.5), transparent 62%),
+    radial-gradient(1.2px 1.2px at 47% 29%, rgba(214, 224, 242, 0.48), transparent 60%),
+    radial-gradient(1.4px 1.4px at 66% 63%, rgba(255, 255, 255, 0.55), transparent 62%),
+    radial-gradient(1.5px 1.5px at 86% 24%, rgba(205, 217, 243, 0.48), transparent 60%);
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.dissolve-fog {
   position: absolute;
   inset: 0;
   opacity: 0;
   background:
-    repeating-linear-gradient(
-      180deg,
-      rgba(181, 202, 255, 0.08) 0 2px,
-      rgba(7, 11, 21, 0.02) 2px 4px
-    ),
-    radial-gradient(
-      circle at var(--warp-x) var(--warp-y),
-      rgba(140, 168, 255, 0.3) 0%,
-      rgba(35, 52, 101, 0.16) 24%,
-      rgba(5, 8, 18, 0.74) 58%,
-      rgba(0, 0, 0, 0.98) 100%
-    );
+    radial-gradient(circle at 20% 40%, rgba(220, 230, 255, 0.28), transparent 58%),
+    radial-gradient(circle at 78% 64%, rgba(200, 216, 250, 0.2), transparent 62%),
+    linear-gradient(180deg, rgba(15, 20, 36, 0.35), rgba(0, 0, 0, 0.8));
 }
-
-.warp-ripple {
-  position: absolute;
-  left: var(--warp-x);
-  top: var(--warp-y);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid rgba(167, 190, 255, 0.55);
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.12);
-}
-
-.warp-core {
-  position: absolute;
-  left: var(--warp-x);
-  top: var(--warp-y);
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid rgba(143, 168, 236, 0.4);
-  transform: translate(-50%, -50%) scale(0.2);
-  opacity: 0;
-  background:
-    radial-gradient(circle at 48% 46%, rgba(15, 22, 42, 0.2) 18%, rgba(2, 4, 10, 0.94) 58%, #000 100%);
-  box-shadow:
-    0 0 26px rgba(96, 128, 234, 0.48),
-    inset 0 0 24px rgba(0, 0, 0, 0.95);
-}
-
 .portal-form {
   position: relative;
   width: 100%;
@@ -355,20 +343,20 @@ body.is-warping .warp-overlay {
   pointer-events: auto;
 }
 
-body.is-warping .warp-scan {
-  animation: warp-scan 0.88s ease both;
+body.is-warping .dissolve-bg {
+  animation: dissolve-bg 0.84s ease both;
 }
 
-body.is-warping .warp-ripple-a {
-  animation: warp-ripple-a 0.84s ease-out both;
+body.is-warping .dissolve-topbar {
+  animation: dissolve-topbar 0.82s ease both;
 }
 
-body.is-warping .warp-ripple-b {
-  animation: warp-ripple-b 0.84s ease-out 0.08s both;
+body.is-warping .dissolve-grain {
+  animation: dissolve-grain 0.86s linear both;
 }
 
-body.is-warping .warp-core {
-  animation: warp-core 0.86s cubic-bezier(0.21, 0.82, 0.1, 1) both;
+body.is-warping .dissolve-fog {
+  animation: dissolve-fog 0.86s ease both;
 }
 
 @keyframes glow-flicker {
@@ -437,59 +425,66 @@ body.is-warping .warp-core {
   }
 }
 
-@keyframes warp-scan {
+@keyframes dissolve-bg {
   0% {
     opacity: 0;
-    filter: blur(0);
+    filter: blur(0) saturate(0.9) brightness(0.76);
   }
-  16% {
-    opacity: 0.86;
+  40% {
+    opacity: 0.72;
+    filter: blur(1.2px) saturate(0.95) brightness(0.88);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0.25px) saturate(1) brightness(1);
+  }
+}
+
+@keyframes dissolve-topbar {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  36% {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dissolve-grain {
+  0% {
+    opacity: 0;
+    transform: translate3d(-2%, 1%, 0);
+    filter: blur(0.2px);
+  }
+  44% {
+    opacity: 0.76;
+    transform: translate3d(1%, -2%, 0);
     filter: blur(0.6px);
   }
-  56% {
-    opacity: 1;
-    filter: blur(1px);
-  }
   100% {
-    opacity: 1;
+    opacity: 0.24;
+    transform: translate3d(3%, -3%, 0);
+    filter: blur(0.3px);
+  }
+}
+
+@keyframes dissolve-fog {
+  0% {
+    opacity: 0.82;
+    filter: blur(0);
+  }
+  58% {
+    opacity: 0.28;
     filter: blur(2px);
   }
-}
-
-@keyframes warp-ripple-a {
-  0% {
-    opacity: 0.78;
-    transform: translate(-50%, -50%) scale(0.2);
-  }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(22);
-  }
-}
-
-@keyframes warp-ripple-b {
-  0% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(0.12);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(18);
-  }
-}
-
-@keyframes warp-core {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.25);
-  }
-  52% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(5.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(34);
+    filter: blur(4px);
   }
 }
 
