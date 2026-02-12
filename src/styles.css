@@ -193,10 +193,10 @@ body {
   inset: -30%;
   background:
     radial-gradient(1.5px 1.5px at 8% 13%, rgba(255, 255, 255, 0.56), transparent 62%),
-    radial-gradient(1.3px 1.3px at 22% 71%, rgba(255, 255, 255, 0.5), transparent 62%),
-    radial-gradient(1.2px 1.2px at 47% 29%, rgba(214, 224, 242, 0.48), transparent 60%),
+    radial-gradient(1.3px 1.3px at 22% 71%, rgba(246, 246, 246, 0.5), transparent 62%),
+    radial-gradient(1.2px 1.2px at 47% 29%, rgba(228, 228, 228, 0.48), transparent 60%),
     radial-gradient(1.4px 1.4px at 66% 63%, rgba(255, 255, 255, 0.55), transparent 62%),
-    radial-gradient(1.5px 1.5px at 86% 24%, rgba(205, 217, 243, 0.48), transparent 60%);
+    radial-gradient(1.5px 1.5px at 86% 24%, rgba(221, 221, 221, 0.48), transparent 60%);
   opacity: 0;
   mix-blend-mode: screen;
 }
@@ -206,9 +206,9 @@ body {
   inset: 0;
   opacity: 0;
   background:
-    radial-gradient(circle at 20% 40%, rgba(220, 230, 255, 0.28), transparent 58%),
-    radial-gradient(circle at 78% 64%, rgba(200, 216, 250, 0.2), transparent 62%),
-    linear-gradient(180deg, rgba(15, 20, 36, 0.35), rgba(0, 0, 0, 0.8));
+    radial-gradient(circle at 20% 40%, rgba(245, 245, 245, 0.28), transparent 58%),
+    radial-gradient(circle at 78% 64%, rgba(232, 232, 232, 0.2), transparent 62%),
+    linear-gradient(180deg, rgba(24, 24, 24, 0.35), rgba(0, 0, 0, 0.8));
 }
 .portal-form {
   position: relative;
@@ -224,10 +224,10 @@ body {
   inset: 8% 8%;
   border-radius: 50%;
   background:
-    radial-gradient(1.4px 1.4px at 22% 34%, rgba(245, 249, 255, 0.95), transparent 62%),
-    radial-gradient(1.3px 1.3px at 72% 22%, rgba(196, 217, 255, 0.88), transparent 64%),
-    radial-gradient(1.2px 1.2px at 78% 76%, rgba(239, 245, 255, 0.92), transparent 65%),
-    radial-gradient(1.2px 1.2px at 36% 78%, rgba(177, 205, 255, 0.84), transparent 62%);
+    radial-gradient(1.4px 1.4px at 22% 34%, rgba(250, 250, 250, 0.95), transparent 62%),
+    radial-gradient(1.3px 1.3px at 72% 22%, rgba(230, 230, 230, 0.88), transparent 64%),
+    radial-gradient(1.2px 1.2px at 78% 76%, rgba(244, 244, 244, 0.92), transparent 65%),
+    radial-gradient(1.2px 1.2px at 36% 78%, rgba(222, 222, 222, 0.84), transparent 62%);
   opacity: 0.72;
   animation: star-drift 7s linear infinite;
   pointer-events: none;
@@ -238,16 +238,16 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(126, 145, 204, 0.38);
+  border: 1px solid rgba(154, 154, 154, 0.42);
   padding: 0;
   overflow: hidden;
   isolation: isolate;
   cursor: pointer;
-  background: radial-gradient(circle at 48% 46%, rgba(16, 20, 34, 0.92), rgba(3, 4, 10, 0.98) 64%, #000 100%);
+  background: radial-gradient(circle at 48% 46%, rgba(22, 22, 22, 0.92), rgba(6, 6, 6, 0.98) 64%, #000 100%);
   box-shadow:
     0 0 0 1px rgba(8, 10, 18, 0.72) inset,
-    0 0 14px rgba(120, 147, 237, 0.44),
-    0 0 34px rgba(66, 93, 190, 0.24);
+    0 0 12px rgba(230, 230, 230, 0.22),
+    0 0 26px rgba(120, 120, 120, 0.2);
   animation: orb-glow 2.2s ease-in-out infinite;
 }
 
@@ -260,10 +260,10 @@ body {
   letter-spacing: 0.12em;
   text-transform: lowercase;
   text-align: center;
-  color: #d7e7ff;
+  color: #ededed;
   text-shadow:
-    0 0 6px rgba(164, 196, 255, 0.45),
-    0 0 12px rgba(81, 120, 228, 0.34);
+    0 0 5px rgba(255, 255, 255, 0.35),
+    0 0 10px rgba(182, 182, 182, 0.26);
 }
 
 #submit-btn.portal-orb::before {
@@ -272,9 +272,9 @@ body {
   inset: -16%;
   z-index: 1;
   background:
-    radial-gradient(1.2px 1.2px at 24% 28%, rgba(249, 252, 255, 0.95), transparent 65%),
-    radial-gradient(1.3px 1.3px at 76% 30%, rgba(191, 216, 255, 0.82), transparent 64%),
-    radial-gradient(1.2px 1.2px at 66% 76%, rgba(236, 244, 255, 0.9), transparent 62%);
+    radial-gradient(1.2px 1.2px at 24% 28%, rgba(252, 252, 252, 0.95), transparent 65%),
+    radial-gradient(1.3px 1.3px at 76% 30%, rgba(236, 236, 236, 0.82), transparent 64%),
+    radial-gradient(1.2px 1.2px at 66% 76%, rgba(246, 246, 246, 0.9), transparent 62%);
   opacity: 0.82;
   animation: star-drift 6.6s linear infinite;
 }
@@ -285,9 +285,9 @@ body {
   inset: 24%;
   z-index: 2;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(15, 22, 44, 0.06) 30%, rgba(5, 8, 18, 0.88) 62%, rgba(0, 0, 0, 1) 100%);
+  background: radial-gradient(circle, rgba(22, 22, 22, 0.06) 30%, rgba(8, 8, 8, 0.88) 62%, rgba(0, 0, 0, 1) 100%);
   box-shadow:
-    0 0 12px rgba(95, 132, 236, 0.4),
+    0 0 10px rgba(220, 220, 220, 0.2),
     inset 0 0 16px rgba(0, 0, 0, 0.95);
   animation: hole-pulse 2.6s ease-in-out infinite;
 }
@@ -336,6 +336,7 @@ body.is-warping .panel-shell {
 body.is-warping .rope-zone,
 body.is-warping .panel-shell {
   pointer-events: none !important;
+  transition: none !important;
 }
 
 body.is-warping .warp-overlay {
@@ -408,20 +409,20 @@ body.is-warping .dissolve-fog {
   0% {
     box-shadow:
       0 0 0 1px rgba(8, 10, 18, 0.72) inset,
-      0 0 10px rgba(108, 138, 236, 0.38),
-      0 0 24px rgba(65, 89, 176, 0.18);
+      0 0 9px rgba(218, 218, 218, 0.22),
+      0 0 22px rgba(102, 102, 102, 0.2);
   }
   50% {
     box-shadow:
       0 0 0 1px rgba(10, 12, 22, 0.74) inset,
-      0 0 16px rgba(149, 177, 255, 0.55),
-      0 0 36px rgba(88, 120, 224, 0.3);
+      0 0 14px rgba(245, 245, 245, 0.35),
+      0 0 30px rgba(140, 140, 140, 0.24);
   }
   100% {
     box-shadow:
       0 0 0 1px rgba(8, 10, 18, 0.72) inset,
-      0 0 11px rgba(116, 147, 241, 0.4),
-      0 0 26px rgba(66, 93, 186, 0.2);
+      0 0 10px rgba(224, 224, 224, 0.24),
+      0 0 24px rgba(108, 108, 108, 0.2);
   }
 }
 
