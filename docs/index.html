@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>V2EX Portal</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="hero" aria-hidden="true">
+        <div class="aurora aurora-a"></div>
+        <div class="aurora aurora-b"></div>
+        <div class="hero-content">
+          <p class="eyebrow">GITHUB PAGES</p>
+          <h1>V2EX Portal</h1>
+          <p>这是你托管在 GitHub Pages 的自定义登录入口页。</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="card">
+          <h2>进入官方登录</h2>
+          <p class="desc">账号密码会保留在本地页面，不会发送到你自己的服务器。</p>
+
+          <form id="login-form" autocomplete="on">
+            <label>
+              <span>用户名</span>
+              <input id="username" name="username" type="text" autocomplete="username" />
+            </label>
+            <label>
+              <span>密码</span>
+              <input id="password" name="password" type="password" autocomplete="current-password" />
+            </label>
+            <button type="submit">打开 V2EX 官方登录</button>
+          </form>
+
+          <p id="status"></p>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
+

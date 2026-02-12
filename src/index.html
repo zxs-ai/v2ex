@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V2EX Local Client</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="stage-wrap" aria-hidden="true">
+        <div class="stage-bg"></div>
+        <div class="stage-orbit orbit-a"></div>
+        <div class="stage-orbit orbit-b"></div>
+        <div class="stage-copy">
+          <p class="eyebrow">LOCAL UI SHELL</p>
+          <h1>Your V2EX Portal</h1>
+          <p>这里是你后续自定义动效和视觉风格的位置。</p>
+        </div>
+      </section>
+
+      <section class="panel-wrap">
+        <div class="panel">
+          <h2>登录 V2EX</h2>
+          <p class="subline">输入账号后将跳转官方登录页并尝试自动提交。</p>
+
+          <form id="login-form" autocomplete="on">
+            <label class="field">
+              <span>用户名</span>
+              <input id="username" name="username" type="text" autocomplete="username" />
+            </label>
+            <label class="field">
+              <span>密码</span>
+              <input id="password" name="password" type="password" autocomplete="current-password" />
+            </label>
+            <button id="submit-btn" type="submit">进入官方并登录</button>
+          </form>
+
+          <button id="manual-btn" type="button" class="ghost-btn">只打开官方登录页</button>
+
+          <p id="status" class="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
+
