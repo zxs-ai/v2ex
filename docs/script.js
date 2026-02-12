@@ -1,9 +1,11 @@
 const form = document.getElementById("login-form");
+const submitButton = document.getElementById("submit-btn");
 const cursorGlow = document.getElementById("cursor-glow");
 const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
 const ropePath = document.getElementById("rope-path");
 const ropePathBack = document.getElementById("rope-path-back");
+const warpOverlay = document.getElementById("warp-overlay");
 
 const SIGNIN_URL = "https://www.v2ex.com/signin";
 
@@ -11,6 +13,7 @@ const ROPE_X = 60;
 const ROPE_BASE_Y = 340;
 const MAX_PULL = 132;
 const TOGGLE_THRESHOLD = 52;
+const WARP_DURATION_MS = 820;
 
 const state = {
   dragging: false,
@@ -30,6 +33,7 @@ const state = {
   jitterB: 0,
   idleSeed: Math.random() * Math.PI * 2
 };
+let isWarping = false;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -44,6 +48,36 @@ function setCursorGlow(event) {
 
 function toggleLight() {
   document.body.classList.toggle("light-on");
+}
+
+function setWarpOriginFromButton() {
+  const rect = submitButton.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  warpOverlay.style.setProperty("--warp-x", `${x}px`);
+  warpOverlay.style.setProperty("--warp-y", `${y}px`);
+}
+
+function startWarpAndNavigate(navigateFn) {
+  if (isWarping) {
+    return;
+  }
+  isWarping = true;
+  setWarpOriginFromButton();
+  submitButton.disabled = true;
+  submitButton.classList.add("is-loading");
+  document.body.classList.add("is-warping");
+
+  window.setTimeout(async () => {
+    try {
+      await navigateFn();
+    } catch (error) {
+      isWarping = false;
+      submitButton.disabled = false;
+      submitButton.classList.remove("is-loading");
+      document.body.classList.remove("is-warping");
+    }
+  }, WARP_DURATION_MS);
 }
 
 function drawRope(now) {
@@ -195,5 +229,7 @@ requestAnimationFrame(animate);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  window.location.href = SIGNIN_URL;
+  startWarpAndNavigate(() => {
+    window.location.href = SIGNIN_URL;
+  });
 });

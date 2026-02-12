@@ -11,6 +11,7 @@ function createMainWindow() {
     minWidth: 900,
     minHeight: 640,
     title: "V2EX Local Client",
+    backgroundColor: "#000000",
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -123,4 +124,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-

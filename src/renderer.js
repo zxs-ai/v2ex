@@ -5,11 +5,13 @@ const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
 const ropePath = document.getElementById("rope-path");
 const ropePathBack = document.getElementById("rope-path-back");
+const warpOverlay = document.getElementById("warp-overlay");
 
 const ROPE_X = 60;
 const ROPE_BASE_Y = 340;
 const MAX_PULL = 132;
 const TOGGLE_THRESHOLD = 52;
+const WARP_DURATION_MS = 820;
 
 const state = {
   dragging: false,
@@ -29,6 +31,7 @@ const state = {
   jitterB: 0,
   idleSeed: Math.random() * Math.PI * 2
 };
+let isWarping = false;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -43,6 +46,14 @@ function setCursorGlow(event) {
 
 function toggleLight() {
   document.body.classList.toggle("light-on");
+}
+
+function setWarpOriginFromButton() {
+  const rect = submitButton.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  warpOverlay.style.setProperty("--warp-x", `${x}px`);
+  warpOverlay.style.setProperty("--warp-y", `${y}px`);
 }
 
 function drawRope(now) {
@@ -197,13 +208,28 @@ function setLoading(loading) {
   submitButton.classList.toggle("is-loading", loading);
 }
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+async function startWarpAndNavigate(navigateFn) {
+  if (isWarping) {
+    return;
+  }
+
+  isWarping = true;
+  setWarpOriginFromButton();
   setLoading(true);
+  document.body.classList.add("is-warping");
+
+  await new Promise((resolve) => window.setTimeout(resolve, WARP_DURATION_MS));
 
   try {
-    await window.v2exClient.openOfficialSignin();
+    await navigateFn();
   } catch (error) {
+    isWarping = false;
     setLoading(false);
+    document.body.classList.remove("is-warping");
   }
+}
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await startWarpAndNavigate(() => window.v2exClient.openOfficialSignin());
 });

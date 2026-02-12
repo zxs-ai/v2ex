@@ -162,6 +162,66 @@ body {
   z-index: 20;
 }
 
+.warp-overlay {
+  --warp-x: 76%;
+  --warp-y: 50%;
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.18s ease;
+}
+
+.warp-scan {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(181, 202, 255, 0.08) 0 2px,
+      rgba(7, 11, 21, 0.02) 2px 4px
+    ),
+    radial-gradient(
+      circle at var(--warp-x) var(--warp-y),
+      rgba(140, 168, 255, 0.3) 0%,
+      rgba(35, 52, 101, 0.16) 24%,
+      rgba(5, 8, 18, 0.74) 58%,
+      rgba(0, 0, 0, 0.98) 100%
+    );
+}
+
+.warp-ripple {
+  position: absolute;
+  left: var(--warp-x);
+  top: var(--warp-y);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 190, 255, 0.55);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.12);
+}
+
+.warp-core {
+  position: absolute;
+  left: var(--warp-x);
+  top: var(--warp-y);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(143, 168, 236, 0.4);
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0;
+  background:
+    radial-gradient(circle at 48% 46%, rgba(15, 22, 42, 0.2) 18%, rgba(2, 4, 10, 0.94) 58%, #000 100%);
+  box-shadow:
+    0 0 26px rgba(96, 128, 234, 0.48),
+    inset 0 0 24px rgba(0, 0, 0, 0.95);
+}
+
 .portal-form {
   position: relative;
   width: 100%;
@@ -272,6 +332,45 @@ body.light-on .panel-shell {
   transform: translateY(-50%) translateX(0);
 }
 
+body.is-warping .scene {
+  background: #000 !important;
+}
+
+body.is-warping .ambient-light,
+body.is-warping .cursor-glow,
+body.is-warping .hint,
+body.is-warping .rope-zone,
+body.is-warping .panel-shell {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease;
+}
+
+body.is-warping .rope-zone,
+body.is-warping .panel-shell {
+  pointer-events: none !important;
+}
+
+body.is-warping .warp-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.is-warping .warp-scan {
+  animation: warp-scan 0.88s ease both;
+}
+
+body.is-warping .warp-ripple-a {
+  animation: warp-ripple-a 0.84s ease-out both;
+}
+
+body.is-warping .warp-ripple-b {
+  animation: warp-ripple-b 0.84s ease-out 0.08s both;
+}
+
+body.is-warping .warp-core {
+  animation: warp-core 0.86s cubic-bezier(0.21, 0.82, 0.1, 1) both;
+}
+
 @keyframes glow-flicker {
   0% {
     opacity: 0.44;
@@ -335,6 +434,62 @@ body.light-on .panel-shell {
       0 0 0 1px rgba(8, 10, 18, 0.72) inset,
       0 0 11px rgba(116, 147, 241, 0.4),
       0 0 26px rgba(66, 93, 186, 0.2);
+  }
+}
+
+@keyframes warp-scan {
+  0% {
+    opacity: 0;
+    filter: blur(0);
+  }
+  16% {
+    opacity: 0.86;
+    filter: blur(0.6px);
+  }
+  56% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+}
+
+@keyframes warp-ripple-a {
+  0% {
+    opacity: 0.78;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(22);
+  }
+}
+
+@keyframes warp-ripple-b {
+  0% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.12);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(18);
+  }
+}
+
+@keyframes warp-core {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  52% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(5.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(34);
   }
 }
 
