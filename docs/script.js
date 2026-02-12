@@ -56,25 +56,37 @@ function emitWarpParticles() {
   const ox = rect.left + rect.width / 2;
   const oy = rect.top + rect.height / 2;
 
-  const count = 64;
+  const palette = [
+    { color: "rgba(255, 255, 255, 0.96)", glow: "rgba(255, 255, 255, 0.68)", halo: "rgba(230, 230, 230, 0.42)" },
+    { color: "rgba(209, 230, 255, 0.9)", glow: "rgba(148, 205, 255, 0.56)", halo: "rgba(122, 181, 248, 0.34)" },
+    { color: "rgba(255, 216, 164, 0.88)", glow: "rgba(255, 184, 102, 0.58)", halo: "rgba(255, 155, 82, 0.34)" },
+    { color: "rgba(48, 57, 70, 0.88)", glow: "rgba(23, 31, 42, 0.5)", halo: "rgba(12, 18, 27, 0.32)" },
+    { color: "rgba(88, 96, 112, 0.82)", glow: "rgba(44, 51, 65, 0.44)", halo: "rgba(28, 34, 45, 0.3)" }
+  ];
+
+  const count = 150;
   for (let i = 0; i < count; i += 1) {
     const p = document.createElement("span");
     p.className = "warp-particle";
+    const tone = palette[Math.floor(Math.random() * palette.length)];
 
-    const spreadY = (Math.random() - 0.5) * 180;
-    const tx = -(120 + Math.random() * 620);
-    const ty = spreadY + (Math.random() - 0.5) * 24;
-    const size = 1 + Math.random() * 2.8;
-    const dur = 420 + Math.random() * 340;
-    const delay = Math.random() * 120;
+    const spreadY = (Math.random() - 0.5) * 220;
+    const tx = -(200 + Math.random() * 760);
+    const ty = spreadY + (Math.random() - 0.5) * 34;
+    const size = 1.2 + Math.random() * 3.3;
+    const dur = 420 + Math.random() * 390;
+    const delay = Math.random() * 150;
 
-    p.style.left = `${ox + (Math.random() - 0.5) * 12}px`;
-    p.style.top = `${oy + (Math.random() - 0.5) * 12}px`;
+    p.style.left = `${ox + (Math.random() - 0.5) * 20}px`;
+    p.style.top = `${oy + (Math.random() - 0.5) * 20}px`;
     p.style.setProperty("--tx", `${tx}px`);
     p.style.setProperty("--ty", `${ty}px`);
     p.style.setProperty("--size", `${size}px`);
     p.style.setProperty("--dur", `${dur}ms`);
     p.style.setProperty("--delay", `${delay}ms`);
+    p.style.setProperty("--particle-color", tone.color);
+    p.style.setProperty("--particle-glow", tone.glow);
+    p.style.setProperty("--particle-halo", tone.halo);
 
     warpParticles.appendChild(p);
   }

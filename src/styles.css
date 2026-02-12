@@ -186,10 +186,10 @@ body {
   width: var(--size, 2px);
   height: var(--size, 2px);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--particle-color, rgba(255, 255, 255, 0.95));
   box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.55),
-    0 0 12px rgba(233, 233, 233, 0.35);
+    0 0 7px var(--particle-glow, rgba(255, 255, 255, 0.62)),
+    0 0 14px var(--particle-halo, rgba(233, 233, 233, 0.4));
   opacity: 0;
   transform: translate3d(0, 0, 0) scale(1);
   will-change: transform, opacity;
