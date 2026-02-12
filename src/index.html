@@ -7,29 +7,37 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="layout">
-      <section class="stage-wrap" aria-hidden="true">
-        <div class="stage-bg"></div>
-        <div class="stage-orbit orbit-a"></div>
-        <div class="stage-orbit orbit-b"></div>
-        <div class="stage-copy">
-          <p class="eyebrow">LOCAL UI SHELL</p>
-          <h1>Your V2EX Portal</h1>
-          <p>这里是你后续自定义动效和视觉风格的位置。</p>
+    <main class="scene" id="scene">
+      <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+      <p class="hint" id="hint">请开灯查看</p>
+
+      <section class="lamp-zone" aria-hidden="true">
+        <div class="lamp lamp-left">
+          <div class="lamp-base"></div>
+          <div class="lamp-stand"></div>
+          <div class="lamp-arm arm-a"></div>
+          <div class="lamp-arm arm-b"></div>
+          <div class="lamp-head"></div>
+          <div class="lamp-cone"></div>
+          <div class="pull-cord" id="pull-cord">
+            <span class="cord-line" id="cord-line"></span>
+            <span class="cord-knob" id="cord-knob"></span>
+          </div>
         </div>
       </section>
 
-      <section class="panel-wrap">
-        <div class="panel">
+      <section class="panel-shell" id="panel-shell">
+        <div class="card">
           <h2>登录 V2EX</h2>
-          <p class="subline">输入账号后将跳转官方登录页并尝试自动提交。</p>
+          <p class="desc">开灯后可自动提交，若失败可手动打开官方登录页。</p>
 
           <form id="login-form" autocomplete="on">
-            <label class="field">
+            <label>
               <span>用户名</span>
               <input id="username" name="username" type="text" autocomplete="username" />
             </label>
-            <label class="field">
+            <label>
               <span>密码</span>
               <input id="password" name="password" type="password" autocomplete="current-password" />
             </label>
@@ -38,11 +46,10 @@
 
           <button id="manual-btn" type="button" class="ghost-btn">只打开官方登录页</button>
 
-          <p id="status" class="status" aria-live="polite"></p>
+          <p id="status" aria-live="polite"></p>
         </div>
       </section>
     </main>
     <script src="./renderer.js"></script>
   </body>
 </html>
-
