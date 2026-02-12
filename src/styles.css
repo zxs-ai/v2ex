@@ -226,18 +226,6 @@ body.light-on .panel-shell {
   transform: translateY(-50%) translateX(0);
 }
 
-body.light-on .scene {
-  background: linear-gradient(150deg, var(--bg-light-a), var(--bg-light-b) 54%, #d5dbe3 100%);
-}
-
-body.light-on .ambient-light {
-  opacity: 1;
-}
-
-body.light-on .cursor-glow {
-  opacity: 0.16;
-}
-
 body.light-on .card {
   box-shadow: 0 24px 54px rgba(47, 56, 69, 0.2);
 }
