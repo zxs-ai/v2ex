@@ -5,6 +5,7 @@ const ropeZone = document.getElementById("rope-zone");
 const ropeGrip = document.getElementById("rope-grip");
 const ropePath = document.getElementById("rope-path");
 const ropePathBack = document.getElementById("rope-path-back");
+const warpParticles = document.getElementById("warp-particles");
 
 const SIGNIN_URL = "https://www.v2ex.com/signin";
 
@@ -49,11 +50,42 @@ function toggleLight() {
   document.body.classList.toggle("light-on");
 }
 
+function emitWarpParticles() {
+  warpParticles.innerHTML = "";
+  const rect = submitButton.getBoundingClientRect();
+  const ox = rect.left + rect.width / 2;
+  const oy = rect.top + rect.height / 2;
+
+  const count = 64;
+  for (let i = 0; i < count; i += 1) {
+    const p = document.createElement("span");
+    p.className = "warp-particle";
+
+    const spreadY = (Math.random() - 0.5) * 180;
+    const tx = -(120 + Math.random() * 620);
+    const ty = spreadY + (Math.random() - 0.5) * 24;
+    const size = 1 + Math.random() * 2.8;
+    const dur = 420 + Math.random() * 340;
+    const delay = Math.random() * 120;
+
+    p.style.left = `${ox + (Math.random() - 0.5) * 12}px`;
+    p.style.top = `${oy + (Math.random() - 0.5) * 12}px`;
+    p.style.setProperty("--tx", `${tx}px`);
+    p.style.setProperty("--ty", `${ty}px`);
+    p.style.setProperty("--size", `${size}px`);
+    p.style.setProperty("--dur", `${dur}ms`);
+    p.style.setProperty("--delay", `${delay}ms`);
+
+    warpParticles.appendChild(p);
+  }
+}
+
 function startWarpAndNavigate(navigateFn) {
   if (isWarping) {
     return;
   }
   isWarping = true;
+  emitWarpParticles();
   submitButton.disabled = true;
   submitButton.classList.add("is-loading");
   document.body.classList.add("is-warping");

@@ -172,6 +172,29 @@ body {
   transition: opacity 0.18s ease;
 }
 
+.warp-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.warp-particle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--size, 2px);
+  height: var(--size, 2px);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.55),
+    0 0 12px rgba(233, 233, 233, 0.35);
+  opacity: 0;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: transform, opacity;
+}
+
 .dissolve-bg {
   position: absolute;
   inset: 0;
@@ -344,6 +367,14 @@ body.is-warping .warp-overlay {
   pointer-events: auto;
 }
 
+body.is-warping .warp-particles {
+  opacity: 1;
+}
+
+body.is-warping .warp-particle {
+  animation: particle-left var(--dur, 520ms) cubic-bezier(0.15, 0.72, 0.22, 1) var(--delay, 0ms) both;
+}
+
 body.is-warping .dissolve-bg {
   animation: dissolve-bg 0.84s ease both;
 }
@@ -486,6 +517,20 @@ body.is-warping .dissolve-fog {
   100% {
     opacity: 0;
     filter: blur(4px);
+  }
+}
+
+@keyframes particle-left {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.6);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx, -220px), var(--ty, 0px), 0) scale(0.2);
   }
 }
 
