@@ -13,28 +13,22 @@
 
       <p class="hint" id="hint">请开灯查看</p>
 
-      <section class="rope-zone" aria-hidden="true">
-        <div class="rope-sway">
-          <span class="rope-line"></span>
-          <span class="rope-tip"></span>
-        </div>
+      <section class="rope-zone" id="rope-zone">
+        <span class="rope-anchor" aria-hidden="true"></span>
+        <svg class="rope-svg" viewBox="0 0 120 540" preserveAspectRatio="none" aria-hidden="true">
+          <path id="rope-path-back" class="rope-path rope-path-back"></path>
+          <path id="rope-path" class="rope-path"></path>
+        </svg>
+        <button id="rope-grip" class="rope-grip" type="button" aria-label="拉绳开关"></button>
       </section>
 
       <section class="panel-shell" id="panel-shell">
         <div class="card">
           <h2>进入官方登录</h2>
-          <p class="desc">点按钮后进入 V2EX 官方登录页。</p>
+          <p class="desc">开灯后点击按钮，进入 V2EX 官方登录页。</p>
 
           <form id="login-form" autocomplete="on">
-            <label>
-              <span>用户名</span>
-              <input id="username" name="username" type="text" autocomplete="username" />
-            </label>
-            <label>
-              <span>密码</span>
-              <input id="password" name="password" type="password" autocomplete="current-password" />
-            </label>
-            <button type="submit">打开 V2EX 官方登录</button>
+            <button id="submit-btn" type="submit">一键登录 V2EX</button>
           </form>
 
           <p id="status" aria-live="polite"></p>

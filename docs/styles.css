@@ -1,14 +1,13 @@
 :root {
   --bg: #000000;
-  --hint: rgba(232, 232, 232, 0.55);
+  --hint: rgba(226, 229, 236, 0.6);
   --card: #eef3f7;
   --ink: #0e2632;
   --muted: #4b6778;
-  --input-line: #c6d5dd;
   --accent: #129fa6;
   --accent-deep: #0c6f7b;
   --bg-light-a: #f4f6fa;
-  --bg-light-b: #dde2e9;
+  --bg-light-b: #dce2ea;
 }
 
 * {
@@ -42,8 +41,8 @@ body {
   z-index: 2;
   opacity: 0;
   background:
-    radial-gradient(circle at 35% 42%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.18) 36%, rgba(255, 255, 255, 0.02) 62%, transparent 82%),
-    radial-gradient(circle at 72% 56%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.02) 56%, transparent 78%);
+    radial-gradient(circle at 32% 44%, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.16) 37%, rgba(255, 255, 255, 0.02) 65%, transparent 84%),
+    radial-gradient(circle at 72% 56%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.02) 58%, transparent 80%);
   transition: opacity 0.45s ease;
 }
 
@@ -65,14 +64,15 @@ body {
 
 .hint {
   position: absolute;
-  inset: 50% auto auto 50%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
   letter-spacing: 0.16em;
   font-size: clamp(12px, 1.7vw, 15px);
   color: var(--hint);
   transition: opacity 0.35s ease, transform 0.35s ease;
-  z-index: 10;
+  z-index: 11;
 }
 
 .rope-zone {
@@ -80,56 +80,73 @@ body {
   left: 33%;
   top: 0;
   transform: translateX(-50%);
-  width: 60px;
+  width: 120px;
   height: 66vh;
-  z-index: 12;
-  pointer-events: auto;
+  min-height: 340px;
+  z-index: 14;
   touch-action: none;
+  user-select: none;
 }
 
-.rope-sway {
-  --rope-pull: 0px;
-  position: absolute;
-  left: 14px;
-  top: 0;
-  width: 12px;
-  height: 100%;
-  transform-origin: top center;
-  animation: rope-sway 4.6s ease-in-out infinite;
-  transition: transform 0.14s ease;
-}
-
-.rope-zone.active .rope-sway {
-  animation-duration: 2.4s;
-}
-
-.rope-line {
+.rope-anchor {
   position: absolute;
   left: 50%;
   top: 0;
-  width: 2px;
-  height: calc(100% - 18px + var(--rope-pull));
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, rgba(226, 232, 241, 0.62), rgba(101, 108, 118, 0.92));
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.12);
-  transition: height 0.2s ease;
-}
-
-.rope-tip {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 13px;
-  height: 13px;
-  transform: translate(-50%, var(--rope-pull));
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(226, 232, 241, 0.4);
-  background: linear-gradient(160deg, rgba(216, 223, 232, 0.7), rgba(76, 83, 93, 0.95));
+  border: 1px solid rgba(198, 207, 220, 0.42);
+  background: radial-gradient(circle, rgba(230, 236, 245, 0.72), rgba(86, 94, 105, 0.9));
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.rope-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.rope-path {
+  fill: none;
+  stroke: rgba(193, 201, 214, 0.8);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.12));
+}
+
+.rope-path-back {
+  stroke: rgba(24, 28, 34, 0.46);
+  stroke-width: 4.2;
+  filter: none;
+}
+
+.rope-grip {
+  position: absolute;
+  left: 60px;
+  top: 340px;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(207, 216, 228, 0.36);
+  background: linear-gradient(160deg, rgba(207, 216, 227, 0.72), rgba(74, 82, 94, 0.95));
   box-shadow:
-    0 0 0 1px rgba(11, 13, 17, 0.4) inset,
-    0 2px 5px rgba(0, 0, 0, 0.35);
-  transition: transform 0.2s ease;
+    0 0 0 1px rgba(9, 11, 15, 0.42) inset,
+    0 3px 6px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  padding: 0;
+}
+
+.rope-zone.dragging .rope-grip {
+  cursor: grabbing;
+}
+
+.rope-zone.active .rope-grip {
+  box-shadow:
+    0 0 0 1px rgba(9, 11, 15, 0.42) inset,
+    0 4px 8px rgba(0, 0, 0, 0.46),
+    0 0 10px rgba(255, 255, 255, 0.16);
 }
 
 .panel-shell {
@@ -164,32 +181,6 @@ body {
   font-size: 14px;
 }
 
-label {
-  display: block;
-  margin-bottom: 14px;
-}
-
-label span {
-  display: block;
-  margin-bottom: 8px;
-  color: #2f4f5f;
-  font-size: 13px;
-}
-
-input {
-  width: 100%;
-  border: 1px solid var(--input-line);
-  border-radius: 11px;
-  padding: 11px 12px;
-  font-size: 16px;
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(18, 159, 166, 0.16);
-}
-
 button {
   width: 100%;
   border: none;
@@ -209,13 +200,6 @@ button:hover {
 #submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-.ghost-btn {
-  margin-top: 10px;
-  color: #294c5f;
-  border: 1px solid #8da6b4;
-  background: transparent;
 }
 
 #status {
@@ -270,33 +254,11 @@ body.light-on .card {
   }
 }
 
-@keyframes rope-sway {
-  0% {
-    transform: rotate(0.7deg);
-  }
-  25% {
-    transform: rotate(-0.55deg);
-  }
-  50% {
-    transform: rotate(0.45deg);
-  }
-  75% {
-    transform: rotate(-0.65deg);
-  }
-  100% {
-    transform: rotate(0.6deg);
-  }
-}
-
 @media (max-width: 980px) {
   .rope-zone {
     left: 28%;
-    width: 44px;
-    height: 66vh;
-  }
-
-  .rope-sway {
-    left: 10px;
+    width: 100px;
+    min-height: 300px;
   }
 
   .panel-shell {
