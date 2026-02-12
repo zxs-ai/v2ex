@@ -7,8 +7,10 @@ const ropeZone = document.querySelector(".rope-zone");
 const ropeSway = document.querySelector(".rope-sway");
 
 const MAX_PULL = 46;
+const TOGGLE_THRESHOLD = 32;
 let isDraggingRope = false;
 let ropeStartY = 0;
+let toggledInCurrentDrag = false;
 
 function setStatus(text) {
   statusNode.textContent = text;
@@ -38,8 +40,10 @@ ropeZone.addEventListener("pointerleave", () => {
 });
 
 ropeZone.addEventListener("pointerdown", (event) => {
+  event.preventDefault();
   isDraggingRope = true;
   ropeStartY = event.clientY;
+  toggledInCurrentDrag = false;
   ropeZone.classList.add("active");
   ropeZone.setPointerCapture(event.pointerId);
 });
@@ -49,7 +53,9 @@ function resetRope() {
     return;
   }
   isDraggingRope = false;
+  toggledInCurrentDrag = false;
   setRopePull(0);
+  ropeZone.classList.remove("active");
 }
 
 ropeZone.addEventListener("pointerup", resetRope);
@@ -63,6 +69,10 @@ window.addEventListener("pointermove", (event) => {
   }
   const pull = Math.max(0, Math.min(MAX_PULL, event.clientY - ropeStartY));
   setRopePull(pull);
+  if (!toggledInCurrentDrag && pull >= TOGGLE_THRESHOLD) {
+    document.body.classList.toggle("light-on");
+    toggledInCurrentDrag = true;
+  }
 });
 
 function setLoading(loading) {

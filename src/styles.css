@@ -77,12 +77,14 @@ body {
 
 .rope-zone {
   position: absolute;
-  left: 0;
+  left: 33%;
   top: 0;
-  width: 52px;
+  transform: translateX(-50%);
+  width: 60px;
   height: 66vh;
   z-index: 12;
   pointer-events: auto;
+  touch-action: none;
 }
 
 .rope-sway {
@@ -134,11 +136,11 @@ body {
   position: absolute;
   right: max(4vw, 20px);
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(30px);
   width: min(420px, 92vw);
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 20;
 }
 
@@ -223,6 +225,29 @@ button:hover {
   color: #365667;
 }
 
+body.light-on .scene {
+  background: linear-gradient(150deg, var(--bg-light-a), var(--bg-light-b) 54%, #d5dbe3 100%);
+}
+
+body.light-on .ambient-light {
+  opacity: 1;
+}
+
+body.light-on .cursor-glow {
+  opacity: 0.16;
+}
+
+body.light-on .hint {
+  opacity: 0;
+  transform: translate(-50%, -54%);
+}
+
+body.light-on .panel-shell {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
 body.light-on .card {
   box-shadow: 0 24px 54px rgba(47, 56, 69, 0.2);
 }
@@ -265,6 +290,7 @@ body.light-on .card {
 
 @media (max-width: 980px) {
   .rope-zone {
+    left: 28%;
     width: 44px;
     height: 66vh;
   }
@@ -277,7 +303,11 @@ body.light-on .card {
     top: auto;
     bottom: 22px;
     right: 50%;
-    transform: translateX(50%);
+    transform: translateX(50%) translateY(16px);
+  }
+
+  body.light-on .panel-shell {
+    transform: translateX(50%) translateY(0);
   }
 
   .hint {
