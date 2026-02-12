@@ -11,7 +11,7 @@ const ROPE_X = 60;
 const ROPE_BASE_Y = 340;
 const MAX_PULL = 132;
 const TOGGLE_THRESHOLD = 52;
-const WARP_DURATION_MS = 760;
+const WARP_DURATION_MS = 920;
 
 const state = {
   dragging: false,
@@ -55,14 +55,14 @@ function emitWarpParticles() {
   const oy = rect.top + rect.height / 2;
 
   const palette = [
-    { color: "rgba(255, 255, 255, 0.96)", glow: "rgba(255, 255, 255, 0.68)", halo: "rgba(230, 230, 230, 0.42)" },
-    { color: "rgba(209, 230, 255, 0.9)", glow: "rgba(148, 205, 255, 0.56)", halo: "rgba(122, 181, 248, 0.34)" },
-    { color: "rgba(255, 216, 164, 0.88)", glow: "rgba(255, 184, 102, 0.58)", halo: "rgba(255, 155, 82, 0.34)" },
-    { color: "rgba(48, 57, 70, 0.88)", glow: "rgba(23, 31, 42, 0.5)", halo: "rgba(12, 18, 27, 0.32)" },
-    { color: "rgba(88, 96, 112, 0.82)", glow: "rgba(44, 51, 65, 0.44)", halo: "rgba(28, 34, 45, 0.3)" }
+    { color: "rgba(255, 255, 255, 0.98)", glow: "rgba(255, 255, 255, 0.75)", halo: "rgba(228, 228, 228, 0.45)" },
+    { color: "rgba(197, 232, 255, 0.92)", glow: "rgba(141, 208, 255, 0.62)", halo: "rgba(112, 183, 249, 0.36)" },
+    { color: "rgba(255, 224, 170, 0.9)", glow: "rgba(255, 190, 109, 0.62)", halo: "rgba(255, 157, 87, 0.36)" },
+    { color: "rgba(236, 209, 255, 0.88)", glow: "rgba(199, 154, 238, 0.56)", halo: "rgba(166, 127, 217, 0.34)" },
+    { color: "rgba(117, 128, 148, 0.72)", glow: "rgba(78, 89, 109, 0.42)", halo: "rgba(48, 58, 78, 0.28)" }
   ];
 
-  const count = 150;
+  const count = 120;
   for (let i = 0; i < count; i += 1) {
     const p = document.createElement("span");
     p.className = "warp-particle";

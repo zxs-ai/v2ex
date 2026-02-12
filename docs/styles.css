@@ -177,6 +177,7 @@ body {
   inset: 0;
   pointer-events: none;
   opacity: 0;
+  z-index: 5;
 }
 
 .warp-particle {
@@ -200,6 +201,7 @@ body {
   inset: 0;
   opacity: 0;
   background: linear-gradient(180deg, #f8f8f8 0%, #ededed 30%, #e2e2e2 100%);
+  z-index: 1;
 }
 
 .dissolve-topbar {
@@ -209,6 +211,7 @@ body {
   background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.22);
   opacity: 0;
+  z-index: 2;
 }
 
 .dissolve-grain {
@@ -222,6 +225,7 @@ body {
     radial-gradient(1.5px 1.5px at 86% 24%, rgba(221, 221, 221, 0.48), transparent 60%);
   opacity: 0;
   mix-blend-mode: screen;
+  z-index: 3;
 }
 
 .dissolve-fog {
@@ -229,9 +233,10 @@ body {
   inset: 0;
   opacity: 0;
   background:
-    radial-gradient(circle at 20% 40%, rgba(245, 245, 245, 0.28), transparent 58%),
-    radial-gradient(circle at 78% 64%, rgba(232, 232, 232, 0.2), transparent 62%),
-    linear-gradient(180deg, rgba(24, 24, 24, 0.35), rgba(0, 0, 0, 0.8));
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.24), transparent 58%),
+    radial-gradient(circle at 78% 64%, rgba(232, 232, 232, 0.16), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(215, 215, 215, 0.24));
+  z-index: 4;
 }
 .portal-form {
   position: relative;
@@ -460,11 +465,11 @@ body.is-warping .dissolve-fog {
 @keyframes dissolve-bg {
   0% {
     opacity: 0;
-    filter: blur(0) saturate(0.9) brightness(0.76);
+    filter: blur(0) saturate(0.95) brightness(0.9);
   }
   40% {
-    opacity: 0.72;
-    filter: blur(1.2px) saturate(0.95) brightness(0.88);
+    opacity: 0.66;
+    filter: blur(1px) saturate(0.98) brightness(0.96);
   }
   100% {
     opacity: 1;
@@ -494,12 +499,12 @@ body.is-warping .dissolve-fog {
     filter: blur(0.2px);
   }
   44% {
-    opacity: 0.76;
+    opacity: 0.32;
     transform: translate3d(1%, -2%, 0);
     filter: blur(0.6px);
   }
   100% {
-    opacity: 0.24;
+    opacity: 0.12;
     transform: translate3d(3%, -3%, 0);
     filter: blur(0.3px);
   }
@@ -507,11 +512,11 @@ body.is-warping .dissolve-fog {
 
 @keyframes dissolve-fog {
   0% {
-    opacity: 0.82;
+    opacity: 0.38;
     filter: blur(0);
   }
   58% {
-    opacity: 0.28;
+    opacity: 0.14;
     filter: blur(2px);
   }
   100% {
@@ -523,14 +528,17 @@ body.is-warping .dissolve-fog {
 @keyframes particle-left {
   0% {
     opacity: 0;
-    transform: translate3d(0, 0, 0) scale(0.6);
+    transform: translate3d(0, 0, 0) scale(0.5);
   }
-  12% {
+  8% {
     opacity: 1;
+  }
+  56% {
+    opacity: 0.92;
   }
   100% {
     opacity: 0;
-    transform: translate3d(var(--tx, -220px), var(--ty, 0px), 0) scale(0.2);
+    transform: translate3d(var(--tx, -220px), var(--ty, 0px), 0) scale(0.34);
   }
 }
 
